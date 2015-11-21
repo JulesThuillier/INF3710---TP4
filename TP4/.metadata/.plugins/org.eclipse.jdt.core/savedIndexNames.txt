@@ -1,17 +1,17 @@
 INDEX VERSION 1.127+/Users/julesthuillier/Documents/Cours/Automne 2015/INF3710/INF3710---TP4/TP4/.metadata/.plugins/org.eclipse.jdt.core
-1849569243.index
-3712507179.index
 2930465397.index
+3712507179.index
+1849569243.index
 1483036759.index
 3321539481.index
 1313128972.index
 3966689249.index
 1542969262.index
+3069748016.index
+1572549281.index
+4238209716.index
 2839512286.index
 156905802.index
-4238209716.index
-1572549281.index
-3069748016.index
 1769317737.index
 2545238116.index
 1384487945.index
@@ -26,8 +26,8 @@ INDEX VERSION 1.127+/Users/julesthuillier/Documents/Cours/Automne 2015/INF3710/I
 2885545355.index
 2178737305.index
 1765565202.index
-3794497040.index
 1673424710.index
+3794497040.index
 2874462260.index
 4264130396.index
 2478374536.index

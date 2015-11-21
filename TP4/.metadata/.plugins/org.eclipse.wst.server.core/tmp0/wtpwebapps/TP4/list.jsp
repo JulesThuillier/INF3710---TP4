@@ -1,23 +1,25 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-    <title>Liste des équipes</title>
+    <title>Affichage de la liste des sorties à venir</title>
 </head>
 <body>
-    <h1>Liste des équipes</h1>
-    <a href="equipe?option=new">Nouvelle</a>
+    <h1>Affichage de la liste des sorties à venir</h1>
+    <a href="sortie?option=new">Nouvelle Sortie</a>
+    </br>
     <table border="1">
-        <th>Id</th>
-        <th>Nom</th>
-        <th>Pays</th>
-<%  List<String[]> equipes = (List<String[]>)request.getAttribute("equipes");
-    ListIterator<String[]> iterator = equipes.listIterator();
+        <th>Heure</th>
+        <th>Titre</th>
+        <th>Organisateur</th>
+<%  List<String[]> sorties = (List<String[]>)request.getAttribute("sorties");
+    ListIterator<String[]> iterator = sorties.listIterator();
     while(iterator.hasNext()) {
-        String[] monEquipe = iterator.next();%>
+        String[] maSortie = iterator.next(); %>
+        
         <tr>
-            <td><%= monEquipe[0] %></td>
-            <td><%= monEquipe[1] %></td>
-            <td><%= monEquipe[2] %></td>
+            <td><a href="sortie?option=update&id=<%= maSortie[0] %>"><%= maSortie[3] %></a></td>
+            <td><a href="sortie?option=update&id=<%= maSortie[0] %>"><%= maSortie[1] %></a></td>
+            <td><a href="sortie?option=update&id=<%= maSortie[0] %>"><%= maSortie[4] %></a></td>
         </tr>
 <%  }%>
     </table>

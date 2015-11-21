@@ -1,0 +1,23 @@
+<%@ page import="java.util.*" %>
+<html>
+<head>
+    <title>Affichage de la liste des sorties à venir</title>
+</head>
+<body>
+    <h1>Affichage de la liste des sorties à venir</h1>
+    <a href="sortie?option=new">Nouvelle</a>
+    <table border="1">
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Pays</th>
+<% /* List<String[]> equipes = (List<String[]>)request.getAttribute("equipes");
+    ListIterator<String[]> iterator = equipes.listIterator();
+    while(iterator.hasNext()) {
+        String[] monEquipe = iterator.next(); */%>
+        <tr>
+            <td>Bla</td>
+        </tr>
+<% /* }*/%>
+    </table>
+</body>
+</html>

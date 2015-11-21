@@ -1,0 +1,163 @@
+package test;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+@WebServlet("/")
+public class Sortie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	Database database = new Database();
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String option = request.getParameter("option");
+		if(option.equals("list")){
+			//List<String[]> sortie = list();
+			//request.setAttribute("sortie", sortie);
+			request.getRequestDispatcher("/list.jsp").forward(request, response);
+		}
+		else if(option.equals("new")){
+			//List<String[]> pays = selectPays();
+			//request.setAttribute("pays", pays);
+			request.getRequestDispatcher("/new.jsp").forward(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String option = request.getParameter("option");
+		if(option.equals("NouvelleSortie")){
+			String message = creerSortie(request);
+			request.setAttribute("message", message);
+		//	List<String[]> pays = selectPays();
+		//	request.setAttribute("pays", pays);
+			request.getRequestDispatcher("/new.jsp").forward(request, response);
+		}
+	}
+
+	public String insert(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String nom = request.getParameter("nom");
+		String pays = request.getParameter("pays");
+		String sql = "INSERT INTO Equipe VALUES ('"+id+"', '"+nom+"', '"+pays+"')";
+		database.connect();
+		Statement stmt = database.getStatement();
+		int resp = database.executeSql(stmt, sql);
+		database.closeStatement(stmt);
+		database.closeConnection();
+		String message = "Modifi�es: "+resp;
+		return message;
+	}
+
+	
+	public String creerSortie(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String nom = request.getParameter("nom");
+		String date = request.getParameter("date");
+		
+		date += ":00";
+		System.out.println(date);
+		
+		String responsable = request.getParameter("responsable");
+		String genre = request.getParameter("genre");
+		String description = request.getParameter("description");
+		String adresse = request.getParameter("adresse");
+		String participantsMax = request.getParameter("participantsMax");
+		String sql = "INSERT INTO Sortie VALUES ('"+id+"', '"+nom+"', '"+date+"', '"+responsable+"', '"+genre+"', '"+description+"', '"+adresse+"', '"+participantsMax+"')";
+		database.connect();
+		Statement stmt = database.getStatement();
+		int resp = database.executeSql(stmt, sql);
+		database.closeStatement(stmt);
+		database.closeConnection();
+		String message = "Modifi�es: "+resp;
+		return message;
+	}
+	
+	public List<String[]> list() {
+		String sql = "SELECT idSort, dte, responsable FROM Sortie ORDER BY dte";
+		database.connect();
+		Statement stmt = database.getStatement();
+		ResultSet rs = database.executeSelect(stmt, sql);
+		List<String[]> equipes = new ArrayList<String[]>();
+		try {
+			while(rs.next()) {
+				String idEq = rs.getString("idEq");
+				String nom = rs.getString("nom");
+				String pays = rs.getString("pays");
+				equipes.add(new String[] { idEq, nom, pays });
+			}
+			database.closeStatement(stmt);
+			database.closeConnection();
+		}
+		catch(SQLException se) {
+			   se.printStackTrace();
+		}
+		return equipes;
+	}
+	
+	public List<String[]> listSorties() {
+		String sql = "SELECT idSort, dte,  FROM Sortie ORDER BY dte";
+		database.connect();
+		Statement stmt = database.getStatement();
+		ResultSet rs = database.executeSelect(stmt, sql);
+		List<String[]> sorties = new ArrayList<String[]>();
+		try {
+			while(rs.next()) {
+				String id = rs.getString("idSort");
+				Date date = rs.getDate("dte");
+				Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+				calendar.setTime(date);   // assigns calendar to given date 
+				calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+				calendar.get(Calendar.HOUR);        // gets hour in 12h format
+				calendar.get(Calendar.MONTH);
+				String time = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)) + "h" + Integer.toString(calendar.get(Calendar.MINUTE));
+				SimpleDateFormat printFormat = new SimpleDateFormat("yyyy-MM-dd");				
+				System.out.println(printFormat.format(date)); 
+				
+				String cal = printFormat.format(date);
+				
+				String responsable = rs.getString("responsable");
+				
+				sorties.add(new String[] { id, cal, time, responsable});
+			}
+			database.closeStatement(stmt);
+			database.closeConnection();
+		}
+		catch(SQLException se) {
+			   se.printStackTrace();
+		}
+		return sorties;
+	}
+
+	public List<String[]> selectPays() {
+		String sql = "SELECT idSort, dte, responsable FROM Sortie ORDER BY dte";
+		database.connect();
+		Statement stmt = database.getStatement();
+		ResultSet rs = database.executeSelect(stmt, sql);
+		List<String[]> pays = new ArrayList<String[]>();
+		try {
+			while(rs.next()) {
+				String idPays = rs.getString("idPays");
+				String nom = rs.getString("nom");
+				pays.add(new String[] { idPays, nom });
+			}
+			database.closeStatement(stmt);
+			database.closeConnection();
+		}
+		catch(SQLException se) {
+			   se.printStackTrace();
+		}
+		return pays;
+	}
+
+}

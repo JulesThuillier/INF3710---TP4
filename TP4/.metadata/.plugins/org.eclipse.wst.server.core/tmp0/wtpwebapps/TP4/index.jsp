@@ -1,12 +1,13 @@
 <html>
 <head>
-    <title>Liste des équipes</title>
+    <title>Menu principal</title>
 </head>
 <body>
-    <h1>Options</h1>
+    <h1>Menu principal</h1>
     <ul>
-        <li><a href="equipe?option=new">Nouvelle</a></li>
-        <li><a href="equipe?option=list">Liste</a></li>
+        <li><a href="sortie?option=new">Création d'une nouvelle sortie</a></li>
+        <li><a href="sortie?option=list">Affichage de la liste des sorties à venir</a></li>
+        <li><a href="sortie?option=update">Changement du pseudonyme de l'utilisateur courant</a></li>
     </ul>
 </body>
 </html>

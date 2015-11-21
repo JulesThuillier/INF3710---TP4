@@ -1,0 +1,53 @@
+<%@ page import="java.util.*" %>
+<html>
+<head>
+    <title>Inscription à une sortie</title>
+</head>
+<body>
+    <h1>Inscription à une sortie</h1>
+    <form name="sortie" action="sortie" method="post">
+    <table>
+        <tr>
+            <td>Sortie:</td>
+            <td><input type="text" name="sortie" size="30" maxlength="80"></td>
+        </tr>
+        <tr>
+            <td>Pseudonyme:</td>
+            <td><input type="text" name="pseudo" size="30" maxlength="80"></td>
+        </tr>
+        <tr>
+            <td>Date (yyyy-MM-dd HH:mm):</td>
+            <td><input type="text" name="date" size="30" maxlength="80"></td>
+        </tr>
+        <tr>
+            <td>Invite:</td>
+            <td><input type="text" name="invite" size="2" maxlength="2"></td>
+        </tr>
+        <tr>
+            <td>Genre:</td>
+            <td><input type="text" name="genre" size="30" maxlength="80"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><textarea name="description" rows="4" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Adresse:</td>
+            <td><input type="text" name="adresse" size="30" maxlength="80"></td>
+        </tr>
+        <tr>
+            <td>Participants:</td>
+            <td><input type="text" name="participantsMax" size="30" maxlength="2"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            	<input type="submit" value="Modifier" name="update">
+            	<input type="submit" value="S'inscrire" name="suscribe">
+				<input type="submit" value="Ajouter commentaire" name="comment">
+				<input type="reset" value="Reset">
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
