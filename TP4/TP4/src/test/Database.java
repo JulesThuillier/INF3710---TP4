@@ -13,8 +13,8 @@ public class Database {
 			String port = "2001";
 			String service = "labos";
 			String dbUrl = "jdbc:oracle:thin:@"+host+":"+port+":"+service;
-			String username = "INF3710-153-XX";
-			String password = "XXXXXX";
+			String username = "INF3710-153-30";
+			String password = "EX6Z6B";
 			connection = DriverManager.getConnection(dbUrl, username, password);
 		}
 		catch(SQLException se) {
@@ -77,5 +77,20 @@ public class Database {
 			   se.printStackTrace();
 		}
 		return resp;
+	}
+	
+	public void commit(){
+		try {
+			connection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}	
 	}
 }
